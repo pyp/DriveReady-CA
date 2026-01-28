@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard - DriveReady</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body style="background-color: #F5F6FA;">
+        <!-- Navigation Bar -->
+        <nav class="dashboard-navbar">
+            <div class="dashboard-container" id="dashboard-container">
+                <div class="main-menu">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                <img src="images/logo.png" style="width: 150px;"/>
+                            </a>
+                        </li>
+                        <li class="notification-container">
+                            <svg width="34" height="33" viewBox="0 0 24 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.0277 5C7.73472 5 5.80843 6.72411 5.55522 9.00306L4.5 18.5H1.5C0.671573 18.5 0 19.1716 0 20V21.5C0 22.3284 0.671573 23 1.5 23H22.5C23.3284 23 24 22.3284 24 21.5V20C24 19.1716 23.3284 18.5 22.5 18.5H19.5L18.4448 9.00306C18.1916 6.72411 16.2653 5 13.9723 5H10.0277Z" fill="#4880FF"/>
+                                <rect opacity="0.3" x="9" y="24.5" width="6" height="6" rx="2.25" fill="#FF0000"/>
+                            </svg>
+                            <div class="notification-dropdown">
+                                <div class="notification-header">
+                                    <h4>Notifications</h4>
+                                    <span class="notification-count" id="notification-count">0</span>
+                                </div>
+                                <div class="notification-list" id="notification-list">
+                                    <div class="notification-item">
+                                        <div class="notification-icon">
+                                            <i class="fa-solid fa-info-circle"></i>
+                                        </div>
+                                        <div class="notification-content">
+                                            <p>No new notifications</p>
+                                            <small>You're all caught up!</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="profile-picture">
+                            <img width="35px" src="images/driveReadyLogo.png">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="sidebar-container">
+            <div class="sidebar">
+                <ul>
+                    <li id="dashboard" class="active">
+                        <a href="#dashboard">
+                            <i class="fa-solid fa-gauge"></i>
+                            <span> Dashboard </span>
+                        </a>
+                    </li>
+                    <li id="lessons">
+                        <a href="#lessons">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span> Lessons </span>
+                        </a>
+                    </li>
+                    <li id="tests">
+                        <a href="#tests">
+                            <i class="fa-solid fa-list"></i>
+                            <span> Tests </span>
+                        </a>
+                        <div class="sidebar-border"></div>
+                    </li>
+                    <li id="logout">
+                        <a id="logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span> Logout </span>
+                        </a>
+                    </li>
+                    <li id="collapse"> 
+                        <a id="collapse"> 
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span> Collapse </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <main class="content">
+            <section id="dashboard">
+                <div class="loader"><div></div></div>
+                <div class="dash-container">
+                    <h3 class="text-xl">Dashboard</h3>
+                    <div class="dash-cards-grid">
+                        <div class="dash-card total-user">
+                            <div>
+                                <p>Total Users</p>
+                                <h3 id="total-users-count"></h3>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="dash-card completed-lessons">
+                            <div>
+                                <p>Completed Lessons</p>
+                                <h3 id="completed-lessons-count"></h3>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-solid  fa-person-chalkboard"></i>
+                            </div>
+                        </div>
+                        <div class="dash-card active-tests">
+                            <div>
+                                <p>Active Tests</p>
+                                <h3 id="active-tests-count"></h3>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                        </div>
+                        <div class="dash-card completed-tests">
+                            <div>
+                                <p>Completed Tests</p>
+                                <h3 id="completed-tests-count"></h3>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <p class="text-md">Analytics</p>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    
+                    <!-- User Progress Section -->
+                    <div class="progress-section">
+                        <h3 class="text-lg">Your Progress</h3>
+                        <div class="progress-cards">
+                            <div class="progress-card">
+                                <div class="progress-info">
+                                    <h4>Lessons Completed</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="lessons-progress"></div>
+                                    </div>
+                                    <span class="progress-text" id="lessons-progress-text">0/63 lessons</span>
+                                </div>
+                                <div class="progress-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-info">
+                                    <h4>Tests Completed</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="tests-progress"></div>
+                                    </div>
+                                    <span class="progress-text" id="tests-progress-text">0/15 tests</span>
+                                </div>
+                                <div class="progress-icon">
+                                    <i class="fa-solid fa-clipboard-check"></i>
+                                </div>
+                            </div>
+                            <div class="progress-card">
+                                <div class="progress-info">
+                                    <h4>Average Score</h4>
+                                    <div class="score-display">
+                                        <span class="score-number" id="average-score">0%</span>
+                                    </div>
+                                    <span class="progress-text">Overall performance</span>
+                                </div>
+                                <div class="progress-icon">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Section -->
+                    <div class="activity-section">
+                        <h3 class="text-lg">Recent Activity</h3>
+                        <div class="activity-list" id="recent-activity">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fa-solid fa-spinner"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Loading recent activity...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>        
+
+            <section id="lessons" style="display: none;">
+                <div class="loader"><div></div></div>
+                <div class="lessons-container">
+                    <h3 class="text-xl">Lessons </h3>
+                    <div class="search-filter-container">
+                        <div class="left-section">
+                            <input type="text" id="searchInputLessons" placeholder="Search by anything..." onkeyup="searchTableLessons()" autocomplete="off">
+                            <div class="custom-dropdown">
+                                <i class="fa-solid fa-filter"></i>
+                                <a class="custom-dropdown-toggle">Filter by Date</a>
+                                <div class="custom-dropdown-menu">
+                                    <a href="#" onclick="filterAndSortTableLessons('Latest')"> Latest </a>
+                                    <a href="#" onclick="filterAndSortTableLessons('Oldest')"> Oldest  </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-section">
+                            <div class="view-toggle">
+                                <button class="view-btn active" id="list-view-lessons" onclick="toggleView('lessons', 'list')">
+                                    <i class="fa-solid fa-list"></i>
+                                </button>
+                                <button class="view-btn" id="grid-view-lessons" onclick="toggleView('lessons', 'grid')">
+                                    <i class="fa-solid fa-th"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Grid container for lessons -->
+                    <div class="grid-container" id="lessons-grid" style="display: none;">
+                        <div class="lessons-grid" id="lessons-grid-content">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Information section (initially hidden) -->
+                <div class="information-container" style="display: none;">
+                    <div class="information-header">
+                        <h3 class="text-xl"></h3>
+                        <div class="icons">
+                            <i class="fa-solid fa-xmark close" onclick="closeLesson()"></i>
+                        </div>
+                    </div>
+                    <div class="information-content">
+                    </div>
+                      
+                    <div class="navigation-arrows">
+                        <button class="btn btn-secondary prev-lesson">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button style="display: none;" class="btn btn-primary take-test-button text-etc"></button>
+                        <button class="btn btn-secondary next-lesson">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tests" style="display: none;">
+                <div class="loader"><div></div></div>
+                <div class="tests-container">
+                    <h3 class="text-xl">Tests </h3>
+                    <div class="search-filter-container">
+                        <div class="left-section">
+                            <input type="text" id="searchInputTests" placeholder="Search by anything..." onkeyup="searchTableTests()" autocomplete="off">
+                            <div class="custom-dropdown">
+                                <i class="fa-solid fa-filter"></i>
+                                <a class="custom-dropdown-toggle">Filter by Status</a>
+                                <div class="custom-dropdown-menu">
+                                    <a href="#" onclick="filterTableTests('All')">All</a>
+                                    <a href="#" onclick="filterTableTests('Completed')">Completed</a>
+                                    <a href="#" onclick="filterTableTests('In-Progress')">In-Progress</a>
+                                    <a href="#" onclick="filterTableTests('Not-Started')">Not-Started</a>
+                                    <a href="#" onclick="filterTableTests('Error')">Error</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-section">
+                            <div class="view-toggle">
+                                <button class="view-btn active" id="list-view-tests" onclick="toggleView('tests', 'list')">
+                                    <i class="fa-solid fa-list"></i>
+                                </button>
+                                <button class="view-btn" id="grid-view-tests" onclick="toggleView('tests', 'grid')">
+                                    <i class="fa-solid fa-th"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Score</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Grid container for tests -->
+                    <div class="grid-container" id="tests-grid" style="display: none;">
+                        <div class="tests-grid" id="tests-grid-content">
+                        </div>
+                    </div>
+                </div>
+                <!-- Questions section (initially hidden) -->
+                <div class="question-container">
+                    <div class="questions-content" style="display: none;">
+                        <div class="question-header">
+                            <h3 class="text-xl">Questions</h3>
+                            <div class="icons">
+                                <p class="question-counter"></p>
+                                <i class="fa-solid fa-xmark close" onclick="closeQuestions()"></i>
+                            </div>
+                        </div>
+                        <div class="question-title">
+                            <p></p>
+                        </div>
+                        <ul class="questions-list">
+                            <li onclick="selectItem(this, 'explanation-0')"></li>
+                            <div id="explanation-0" class="explanation"></div>
+                            <li onclick="selectItem(this, 'explanation-1')"></li>
+                            <div id="explanation-1" class="explanation"></div>
+                            <li onclick="selectItem(this, 'explanation-2')"></li>
+                            <div id="explanation-2" class="explanation"></div>
+                            <li onclick="selectItem(this, 'explanation-3')"></li>
+                            <div id="explanation-3" class="explanation"></div>
+                        </ul>
+                        <div class="navigation-arrows">
+                            <button class="btn btn-secondary prev-question">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                            <button style="display: none;" class="btn btn-primary go-to-lesson-button text-etc"></button>
+                            <button class="btn btn-secondary next-question">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <p class="warning"></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Officer Bob Chat Tab -->
+        <div id="ai-chat-tab" class="chat-tab">
+            <div class="chat-tab-header" id="chat-tab-header">
+                <div class="chat-tab-title">
+                    <div class="chat-avatar">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div class="chat-title-text">
+                        <span class="chat-name">Officer Bob</span>
+                        <span class="chat-status">Online</span>
+                    </div>
+                </div>
+                <div class="chat-tab-controls">
+                    <button id="chat-close-btn" class="chat-control-btn" title="Close">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-tab-content" id="chat-tab-content">
+                <div id="ai-chat-messages" class="chat-messages">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+                
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea id="ai-chat-input" class="chat-input" placeholder="Ask Bob..." rows="1"></textarea>
+                        <button id="ai-send-btn" class="chat-send-btn" disabled>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="chat-typing-indicator" id="ai-typing-indicator" style="display: none;">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span>Officer Bob is typing...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Tab Toggle Button -->
+        <button id="ai-chat-toggle" class="chat-toggle-btn" title="Chat with Officer Bob">
+            <i class="fa-solid fa-comments"></i>
+            <span class="chat-toggle-text">Ask Bob</span>
+        </button>
+         
+        <script src="js/clipboard.js"></script>
+        <script src="js/dashboard.js"></script>
+        <script src="js/ai-chat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    </body>
+</html>

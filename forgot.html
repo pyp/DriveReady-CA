@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - DriveReady</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="js/forgot.js" defer></script>
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <a href="/">
+            <img src="images/logo.png" alt="logo" style="width: 150px; background-color: #fff; padding: 0 20px; border-radius: 45px; margin: 10px;" />
+        </a>
+        <div class="login-form">
+            <div class="login-content"> 
+                <div class="text-center">
+                    <h2 style="font-weight: 500;">Forgot Password</h2>
+                </div>
+                <form>
+                    <div class="input-group">
+                        <label class="text-sm text-secondary" for="email">Email address:</label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                    </div>
+                    <input type="hidden" id="hCaptchaAnswer" name="hCaptchaAnswer">
+                    <div id="captcha-box">
+                        <div class="h-captcha" data-sitekey="0118945c-0ffe-4032-8a6e-52904f344984" data-callback="onCaptchaSolved"></div>
+                    </div>
+                    <button type="submit" class="btn btn-card">Reset Password</button>
+                </form>
+                <div class="extra-links text-center">
+                    <span class="text-sm text-secondary">
+                        Remember your password?
+                        <a href="/login">
+                            <u>Login</u>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

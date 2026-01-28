@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://www.driveready.org/sitemap.xml
